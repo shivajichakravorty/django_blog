@@ -13,9 +13,10 @@ class Category(models.Model):
 
   def __str__(self):
     return self.category_name
+  
 STATUS_CHOICES = (
-    (0, 'Draft'),
-    (1, 'Publish')
+    ('Draft', 'Draft'),
+    ('Publish', 'Publish')
 )
 
 class Blog(models.Model):
@@ -23,10 +24,10 @@ class Blog(models.Model):
   slug = models.SlugField(max_length=200, unique=True, blank=True)
   category = models.ForeignKey(Category, on_delete=models.CASCADE)
   author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-  featured_image = models.ImageField(upload_to='uploads/%Y/%m/', blank=True, null=True)
+  featured_image = models.ImageField(upload_to='uploads/%Y/%m/%d/', blank=True, null=True)
   short_description = models.TextField()
   blog_body = models.TextField()
-  status = models.IntegerField(choices=STATUS_CHOICES, default=0)
+  status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Draft')
   is_featured = models.BooleanField(default=False)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
