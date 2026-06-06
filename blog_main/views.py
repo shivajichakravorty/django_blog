@@ -9,8 +9,10 @@ def home(request):
     #Fetching Categories and Blogs from the database can be done here and passed to the template context if needed.
     categories = Category.objects.all()
     featured_posts = Blog.objects.filter(is_featured=True, status='Publish').order_by('-created_at')[:5]
+    posts = Blog.objects.filter(status='Publish').order_by('-created_at')[:10]
     context = {
         'categories': categories,
         'featured_posts': featured_posts,
+        'posts': posts,
     }
     return render(request, 'home.html', context)

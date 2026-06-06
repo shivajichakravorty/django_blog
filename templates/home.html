@@ -99,32 +99,26 @@
         {% endif %}
         {% endfor %}
       </div>
-
+      <h3 class = "text-uppercase text-warning" style = "letter-spacing:2px;">Recent Posts</h3>
+      {% for post in posts %}
       <main role="main" class="container p-0">
         <div class="row">
           <div class="col-md-8 blog-main">
             <div class="blog-post">
-              <h2 class="blog-post-title">Sample blog post</h2>
+              <h2 class="blog-post-title">{{ post.title }}</h2>
               <p class="blog-post-meta">
-                January 1, 2014 by <a href="#">Mark</a>
+                {{ post.created_at|date:"F d, Y" }} by <a href="#">{{ post.author }}</a>
               </p>
 
               <p>
-                This blog post shows a few different types of content that's
-                supported and styled with Bootstrap. Basic typography, images,
-                and code are all supported.
+                {{ post.blog_body|linebreaks }}
               </p>
 
-              <p>
-                Cum sociis natoque penatibus et magnis
-                <a href="#">dis parturient montes</a>, nascetur ridiculus mus.
-                Aenean eu leo quam. Pellentesque ornare sem lacinia quam
-                venenatis vestibulum. Sed posuere consectetur est at lobortis.
-                Cras mattis consectetur purus sit amet fermentum.
-              </p>
+             
             </div>
             <!-- /.blog-post -->
           </div>
+          {% endfor %}
           <!-- /.blog-main -->
 
           <aside class="col-md-4 blog-sidebar">
