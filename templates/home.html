@@ -9,7 +9,7 @@
         <div class="col-md-6">
           <div class="card border-0">
             <div class="card-body">
-              <h3>{{ post.title }}</h3>
+              <h3><a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">{{ post.title }}</a></h3>
               <small class="mb-1 text-muted">{{ post.created_at| timesince }} | {{ post.author }}</small>
               <p class="card-text">
                 {{ post.short_description }}
@@ -20,7 +20,7 @@
         <div class="col-md-6">
           <div class="card border-0">
             <div class="card-body">
-              <h3>{{ post.title }}</h3>
+              <h3><a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">{{ post.title }}</a></h3>
               <small class="mb-1 text-muted"> {{ post.created_at|timesince }} | {{ post.author }}</small>
               <p class="card-text">
                 {{ post.short_description }}
@@ -37,9 +37,9 @@
         <div class="row">
           <div class="col-md-8 blog-main">
             <div class="blog-post">
-              <h2 class="blog-post-title">{{ post.title }}</h2>
+              <h2 class="blog-post-title"><a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">{{ post.title }}</a></h2>
               <p class="blog-post-meta">
-                {{ post.created_at|date:"F d, Y" }} by <a href="#">{{ post.author }}</a>
+                {{ post.created_at|date:"F d, Y" }} by <a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">{{ post.author }}</a>
               </p>
 
               <p>
