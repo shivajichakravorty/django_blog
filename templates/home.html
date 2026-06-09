@@ -1,81 +1,87 @@
-{% extends 'base.html' %}
-
-{% block content %}
-      <!-- Featured Posts   -->
-       <h3 class = "text-uppercase text-warning" style = "letter-spacing:2px;">Featured Posts</h3>
-      <div class="row mb-2">
-        {% for post in featured_posts %}
-        {% if not forloop.first %}
-        <div class="col-md-6">
-          <div class="card border-0">
-            <div class="card-body">
-              <h3><a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">{{ post.title }}</a></h3>
-              <small class="mb-1 text-muted">{{ post.created_at| timesince }} | {{ post.author }}</small>
-              <p class="card-text">
-                {{ post.short_description }}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card border-0">
-            <div class="card-body">
-              <h3><a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">{{ post.title }}</a></h3>
-              <small class="mb-1 text-muted"> {{ post.created_at|timesince }} | {{ post.author }}</small>
-              <p class="card-text">
-                {{ post.short_description }}
-              </p>
-            </div>
-          </div>
-        </div>
-        {% endif %}
-        {% endfor %}
+{% extends 'base.html' %} {% block content %}
+<!-- Featured Posts   -->
+<h3 class="text-uppercase text-warning" style="letter-spacing: 2px">
+  Featured Posts
+</h3>
+<div class="row mb-2">
+  {% for post in featured_posts %} {% if not forloop.first %}
+  <div class="col-md-6">
+    <div class="card border-0">
+      <div class="card-body">
+        <h3>
+          <a
+            href="{% url 'blogs' post.slug %}"
+            class="text-dark text-decoration-none"
+            >{{ post.title }}</a
+          >
+        </h3>
+        <small class="mb-1 text-muted"
+          >{{ post.created_at| timesince }} | {{ post.author }}</small
+        >
+        <p class="card-text">{{ post.short_description }}</p>
       </div>
-      <h3 class = "text-uppercase text-warning" style = "letter-spacing:2px;">Recent Posts</h3>
-      {% for post in posts %}
-      <main role="main" class="container p-0">
-        <div class="row">
-          <div class="col-md-8 blog-main">
-            <div class="blog-post">
-              <h2 class="blog-post-title"><a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">{{ post.title }}</a></h2>
-              <p class="blog-post-meta">
-                {{ post.created_at|date:"F d, Y" }} by <a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">{{ post.author }}</a>
-              </p>
-
-              <p>
-                {{ post.blog_body|linebreaks }}
-              </p>
-
-             
-            </div>
-            <!-- /.blog-post -->
-          </div>
-          {% endfor %}
-          <!-- /.blog-main -->
-
-          <aside class="col-md-4 blog-sidebar">
-            <div class="p-3 mb-3 bg-light rounded">
-              <h4 class="font-italic">About</h4>
-              <p class="mb-0">
-                Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras
-                mattis consectetur purus sit amet fermentum. Aenean lacinia
-                bibendum nulla sed consectetur.
-              </p>
-            </div>
-
-            <div class="p-3">
-              <h4 class="font-italic">Follow Us</h4>
-              <ol class="list-unstyled">
-                <li><a href="#">GitHub</a></li>
-                <li><a href="#">LinkedIn</a></li>
-              </ol>
-            </div>
-          </aside>
-          <!-- /.blog-sidebar -->
-        </div>
-        <!-- /.row -->
-      </main>
-      <!-- /.container -->
     </div>
-    
-    {% endblock content %}
+  </div>
+  {% endif %} {% endfor %}
+</div>
+<h3 class="text-uppercase text-warning" style="letter-spacing: 2px">
+  Recent Posts
+</h3>
+<main role="main" class="container p-0">
+  <div class="row">
+    <div class="col-md-8 blog-main">
+      {% for post in posts %}
+      <div class="blog-post">
+        <h2 class="blog-post-title">
+          <a
+            href="{% url 'blogs' post.slug %}"
+            class="text-dark text-decoration-none"
+            >{{ post.title }}</a
+          >
+        </h2>
+        <p class="blog-post-meta">
+          {{ post.created_at|date:"F d, Y" }} by
+          <a
+            href="{% url 'blogs' post.slug %}"
+            class="text-dark text-decoration-none"
+            >{{ post.author }}</a
+          >
+        </p>
+        <p>{{ post.blog_body|linebreaks }}</p>
+      </div>
+      <!-- /.blog-post -->
+      {% endfor %}
+    </div>
+    <!-- /.blog-main -->
+
+    <aside class="col-md-4 blog-sidebar">
+      <div class="p-3 mb-3 bg-light rounded">
+        <h4 class="font-italic">About</h4>
+        <p class="mb-0">{{ about.about_description }}</p>
+      </div>
+
+      <div class="p-3">
+        <h4 class="font-italic">Follow Us</h4>
+        <ol class="list-unstyled">
+          {% for link in social_links %}
+          <li>
+            <a href="{{ link.link }}" target="_blank"
+              >{{ link.platform }}</a
+            >
+          </li>
+          {% endfor %}
+        </ol>
+      </div>
+    </aside>
+    <!-- /.blog-sidebar -->
+          </li>
+        </ol>
+      </div>
+    </aside>
+    <!-- /.blog-sidebar -->
+  </div>
+  <!-- /.row -->
+</main>
+<!-- /.container -->
+
+{% endblock content %}

@@ -1,5 +1,5 @@
 <!-- Header Part -->
- {% load static %}
+{% load static %}
 
 <!doctype html>
 <html lang="en">
@@ -42,45 +42,42 @@
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
           {% for category in categories %}
-            <a class="p-2 text-muted" href="{% url 'posts_by_category' category.id %}">{{ category.category_name }}</a>
+          <a
+            class="p-2 text-muted"
+            href="{% url 'posts_by_category' category.id %}"
+            >{{ category.category_name }}</a
+          >
           {% endfor %}
         </nav>
       </div>
-      {% for post in featured_posts %}
-      {% if forloop.first %}
+      {% for post in featured_posts %} {% if forloop.first %}
       <div
         id="jumbotron-bg"
         class="jumbotron p-3 p-md-5 text-white rounded bg-dark"
       >
         <div class="col-md-8 px-0">
-          <h1 class="display-4 font-italic">
-            {{ post.title }}
-          </h1>
-          <p class="lead my-3">
-            {{ post.short_description }}
-          </p>
-            {{ post.blog_body|truncatewords:30 }}
-          </p>
+          <h1 class="display-4 font-italic">{{ post.title }}</h1>
+          <p class="lead my-3">{{ post.short_description }}</p>
+          <p>{{ post.blog_body|truncatewords:30 }}</p>
           <p class="lead mb-0">
-            <a href="{% url 'blogs' post.slug %}" class="text-white font-weight-bold"
+            <a
+              href="{% url 'blogs' post.slug %}"
+              class="text-white font-weight-bold"
               >Continue reading...</a
             >
           </p>
         </div>
       </div>
-      {% endif %}
-      {% endfor %}
+      {% endif %} {% endfor %}
 
-<!-- Main Content Part-->
+      <!-- Main Content Part-->
 
-        {% block content %}
-        {% endblock content %}
-      
+      {% block content %} {% endblock content %}
     </div>
 
-<!-- Footer Part -->
+    <!-- Footer Part -->
 
-<footer class="blog-footer">
+    <footer class="blog-footer">
       <p>Django blog built with � by <a href="#">Shivaji Chakravorty</a></p>
     </footer>
   </body>
